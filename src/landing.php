@@ -1,3 +1,3 @@
 <?php
-echo 'placeholer';
+echo 'placeholder';
 ?>
