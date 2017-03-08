@@ -1,0 +1,22 @@
+create tables: posts, followed_posts
+
+posts class
+  insert, update, delete, view
+
+landing page
+  get session vars
+  dropdown list filter
+  posts form - create
+    hidden field for userid
+    content
+    image upload
+    save to database 
+  posts form - edit
+  posts for delete
+
+write tests
+
+$_SESSION['userid']
+$_SESSION['zipcode']
+
+
