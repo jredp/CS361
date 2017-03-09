@@ -1,3 +1,6 @@
+Linh: let's use master branch for development, it will make it easier
+for us.
+
 x - create tables: posts, followed_posts
 
 posts class
