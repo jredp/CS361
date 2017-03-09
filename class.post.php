@@ -35,6 +35,20 @@ class post {
 		}
 	}
 
+	function getSelect($selIdx = NULL) {
+		$list = '<option value="">select species</option>';
+		$list .= '<option value="all">all species</option>';
+		$rs = $conn->query("select species from pets group by 1 order by 1");
+		while ($row = $rs->fetch_assoc()) {
+			$list .= '<option value="' . $row['species'] . '"';
+			if ($selIdx == $row['species']) {
+				$list .= ' selected';
+			}
+			$list .= '>' . $row['species'] . '</option>';
+		}
+		echo $list;
+	} 
+
 	public function delete($id) {
 		try {
 			$rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
@@ -47,7 +61,7 @@ class post {
 		} 
 	}
 
-  	/* prints table of data with two icon links for edit and delete */
+	/* prints table of data with two icon links for edit and delete */
 	public public function view() {
 		$sql = "SELECT * FROM posts";
 		$rs = $this->conn->prepare($sql);
