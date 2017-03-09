@@ -1,7 +1,7 @@
 <body>
 <?php
 $species = $_GET['myspecies'];
-$cn = new mysqli("localhost", "ironic", "getm0re!", "scratch");
+$cn = new mysqli();
 $sql = "select name, species, age from pets";
 if ($species != "all") $sql .= " where species = '" . $species . "'";
 $rs = mysqli_query($cn, $sql);
