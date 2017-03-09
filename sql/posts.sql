@@ -25,7 +25,8 @@ CREATE TABLE posts (
 	post_id		INT(11) NOT NULL AUTO_INCREMENT, 	
 	post_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	content 	TEXT NOT NULL,
-	user_id int not null,
+	user_id 	int not null,
+	post_img 	varchar(255),
 	PRIMARY KEY (post_id),
 	foreign key (user_id) references users(user_id)
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -57,8 +58,8 @@ values ('test1', 'test', 'one', 'password', 'test1@test.com', 01841);
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
 values ('test2', 'test', 'two', 'password', 'test2@test.com', 90210);
 
-insert into posts (content, user_id)
-values ('my first post', (select user_id from users where user_name = 'test1'));
+insert into posts (content, user_id, post_img)
+values ('my first post', (select user_id from users where user_name = 'test1'), 'post1_img.jpg');
 
 insert into posts (content, user_id)
 values ('my second post has more content than my first', (select user_id from users where user_name = 'test1'));

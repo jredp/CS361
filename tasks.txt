@@ -17,6 +17,8 @@ landing page
   posts form - edit
   posts for delete
 
+http://stackoverflow.com/questions/4422210/how-to-add-simple-image-upload-to-a-form
+
 write tests
 
 $_SESSION['userid']
