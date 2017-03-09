@@ -1,7 +1,7 @@
-create tables: posts, followed_posts
+x - create tables: posts, followed_posts
 
 posts class
-  insert, update, delete, view
+x - insert, update, delete, view
 
 landing page
   get session vars
