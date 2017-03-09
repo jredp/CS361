@@ -13,7 +13,7 @@ function showPosts(cat) {
 				document.getElementById("post-list").innerHTML = this.responseText;
 			}
 		};
-		xmlhttp.open("GET", "getposts.php?myspecies=" + species, true);
+		xmlhttp.open("GET", "getposts.php?postfilter=" + cat, true);
 		xmlhttp.send();
 	}
 }

@@ -62,22 +62,33 @@ class post {
 	}
 
 	/* prints table of data with two icon links for edit and delete */
-	public public function view() {
-		$sql = "SELECT * FROM posts";
+	public function view($curr_user, $filter=NULL) {
+		$sql = "SELECT p.post_date, p.content, p.post_img ";
+		$sql .= "from posts p join users u on p.user_id = u.user_id ";
+		$sql .= "where u.user_name = :user_name ";
+		$sql .= "order by p.post_date desc";
 		$rs = $this->conn->prepare($sql);
+		$rs->bindparam(":user_name", $curr_user);
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {
-			echo "<table>";
-			echo "<thead><tr><th>ID</th><th>Post date</th><th>Content</th></tr></thead>";
-			echo "<tbody>";
+			$html = '<table border="1"><thead><tr><th>content</th><th>image</th><th>date</th></tr></thead>';
+			$html .= '<tbody>';
 			while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
-				echo "<tr><td>" . $row["post_id"] . "</td><td>" . $row["post_date"] . "</td><td>" . $row["content"] . "</td>";
+				$html .= '<tr>';
+				$html .= '<td>' . $row['content'] . '</td>';
+				if (!is_null($row['post_img']) && strlen(trim($row['post_img'])) > 0) {
+					$html .= '<td><img src="postImages/' . $row['post_img'] . '"></td>';
+				} else {
+					$html .= '<td>&nbsp;</td>';
+				}
+				$html .= '<td>' . $row['post_date'] . '</td>';
+				$html .= '</tr>';
 			}
-
 		} else {
-			echo "<tr><td colspan='5' class='text-center'>no records found</td></tr>";
+			$html= "<tr><td colspan='3' class='text-center'>no records found</td></tr>";
 		}
+		return $html;
 	}
 
 }

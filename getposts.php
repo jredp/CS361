@@ -1,18 +1,12 @@
-<body>
 <?php
-$species = $_GET['myspecies'];
-$cn = new mysqli();
-$sql = "select name, species, age from pets";
-if ($species != "all") $sql .= " where species = '" . $species . "'";
-$rs = mysqli_query($cn, $sql);
+session_start();
+include_once 'dbcn.php';
 
-$html = "<table border='1'><tr><th>name</th><th>species</th><th>age</th></tr>";
-while ($row = mysqli_fetch_array($rs)) {
-	$html .= "<tr>";
-	$html .= "<td>" . $row['name'] . "</td>";
-	$html .= "<td>" . $row['species'] . "</td>";
-	$html .= "<td>" . $row['age'] . "</td>";
-	$html .= "</tr>";
+if (isset($_GET['postfilter'])) {
+	$results = $mypost->view($_SESSION['user_name'], $_GET['postfilter']);
+} else {
+	$results = $mypost->view($_SESSION['user_name']);
 }
-$html .= "</table>";
-echo $html;
+
+echo $results;
+?>

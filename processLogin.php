@@ -5,7 +5,8 @@
     ini_set('display_errors', 'On');
 		//Connects to the database
 		// can we use an include say 'dbcn.php' that will let us use different cn strings while we develop - rh
-    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+    // $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+    $mysqli = new mysqli("127.0.0.1","cs361","p@sSw0r4","scratch");
     if($mysqli->connect_errno) {
         echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
     }
@@ -68,7 +69,7 @@
                         $_SESSION['user_level'] = $row['user_level'];
                     }
                      
-                    echo 'Welcome, ' . $_SESSION['user_name'] . '. <a href="index.php">Proceed to the forum overview</a>.';
+                    echo 'Welcome, ' . $_SESSION['user_name'] . '. <a href="landing.php">Proceed to the forum overview</a>.';
                 }
             }
         }
