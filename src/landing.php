@@ -1,6 +1,6 @@
 <?php
 function getSelect($selIdx = NULL) {
-	$cn = new mysqli("localhost", "ironic", "getm0re!", "scratch");
+	$cn = new mysqli();
 	$list = '<option value="">select species</option>';
 	$list .= '<option value="all">all species</option>';
 	$rs = $cn->query("select species from pets group by 1 order by 1");
