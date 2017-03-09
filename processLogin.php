@@ -1,7 +1,10 @@
 <?php
+		// i think we have to start a session before we can have session vars that are available to all pages - rh
+		session_start();
     //Turn on error reporting
     ini_set('display_errors', 'On');
-    //Connects to the database
+		//Connects to the database
+		// can we use an include say 'dbcn.php' that will let us use different cn strings while we develop - rh
     $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
     if($mysqli->connect_errno) {
         echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;

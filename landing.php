@@ -1,4 +1,7 @@
 <?php
+session_start();
+/* $_SESSION['user_name'] = 'test1'; */
+echo $_SESSION['user_name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
