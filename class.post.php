@@ -83,22 +83,24 @@ class post {
 		$rs = $this->conn->prepare($sql);
 		if ($filter != 'all')
 			$rs->bindparam(":value", $value);
-		echo $sql;
+		/* echo $sql; */
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {
 			$html = '<table border="1"><thead><tr><th>content</th><th>image</th><th>date</th></tr></thead>';
 			$html .= '<tbody>';
 			while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
-				$html .= '<tr>';
-				$html .= '<td>' . $row['content'] . '</td>';
-				if (!is_null($row['post_img']) && strlen(trim($row['post_img'])) > 0) {
-					$html .= '<td><img src="postImages/' . $row['post_img'] . '"></td>';
-				} else {
-					$html .= '<td>&nbsp;</td>';
+				if (!is_null($row['content']) && strlen(trim($row['content'])) > 0) {
+					$html .= '<tr>';
+					$html .= '<td>' . $row['content'] . '</td>';
+					if (!is_null($row['post_img']) && strlen(trim($row['post_img'])) > 0) {
+						$html .= '<td><img src="postImages/' . $row['post_img'] . '"></td>';
+					} else {
+						$html .= '<td>&nbsp;</td>';
+					}
+					$html .= '<td>' . $row['post_date'] . '</td>';
+					$html .= '</tr>';
 				}
-				$html .= '<td>' . $row['post_date'] . '</td>';
-				$html .= '</tr>';
 			}
 		} else {
 			$html= "<tr><td colspan='3' class='text-center'>no records found</td></tr>";

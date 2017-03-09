@@ -1,5 +1,4 @@
 <?php
-		// i think we have to start a session before we can have session vars that are available to all pages - rh
 		session_start();
     //Turn on error reporting
     ini_set('display_errors', 'On');

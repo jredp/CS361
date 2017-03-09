@@ -7,8 +7,9 @@ posts class
 x - insert, update, delete, view
 
 landing page
-  get session vars
-  dropdown list filter
+  x - get session vars
+  x - dropdown list filter
+  add link in posts table for edit, delete
   posts form - create
     hidden field for userid
     content
@@ -20,8 +21,4 @@ landing page
 http://stackoverflow.com/questions/4422210/how-to-add-simple-image-upload-to-a-form
 
 write tests
-
-$_SESSION['userid']
-$_SESSION['zipcode']
-
 
