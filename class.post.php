@@ -7,19 +7,21 @@ class post {
 		$this->conn = $dbcn;
 	}
 
-	function insert($content) {
+	public function insert($content) {
 		try {
-			$sql = "INSERT INTO posts (content) VALUES (:content)";
+			$sql = "INSERT INTO posts (content, user_id) VALUES (:content, :user_id)";
 			$rs = $this->conn->prepare($sql);
 			$rs->bindparam(":content", $content);
+			$rs->bindparam(":user_id", $user_id);
 			$rs->execute();
 			return true;
 		} catch (PDOException $e) {
+			echo $e->getMessage();
 			return false;
 		}
 	}
 
-	function update($post_id, $content) {
+	public function update($post_id, $content) {
 		try {
 			$sql = "UPDATE posts SET content=:content WHERE post_id=:post_id;";
 			$rs = $this->conn->prepare($sql);
@@ -28,19 +30,25 @@ class post {
 			$rs->execute();
 			return true;
 		} catch (PDOException $e) {
+			echo $e->getMessage();
 			return false;
 		}
 	}
 
-	function delete($id) {
-		$rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
-		$rs->bindparam(":id", $id);
-		$rs->execute();
-		return true;
+	public function delete($id) {
+		try {
+			$rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
+			$rs->bindparam(":id", $id);
+			$rs->execute();
+			return true;
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+			return false;
+		} 
 	}
 
   	/* prints table of data with two icon links for edit and delete */
-	public function view() {
+	public public function view() {
 		$sql = "SELECT * FROM posts";
 		$rs = $this->conn->prepare($sql);
 		$rs->execute();
