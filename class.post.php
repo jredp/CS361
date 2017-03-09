@@ -61,17 +61,29 @@ class post {
 		} 
 	}
 
-	/* prints table of data with two icon links for edit and delete */
-	public function view($curr_user, $filter=NULL) {
-		$sql = "SELECT p.post_date, p.content, p.post_img ";
-		$sql .= "from posts p join users u on p.user_id = u.user_id ";
-		$sql .= "where u.user_name = :user_name ";
-		if ($filter) {
-			$sql .= "and " . 
-		$sql .= "order by p.post_date desc";
+	// prints table of data with two icon links for edit and delete
+	// $filter values: mine, following, local, all
+	// TODO: refactor
+	public function view($filter, $value=NULL) {
+		$sql = "SELECT post_date, content, post_img ";
+
+		if ($filter == 'all') {
+			$sql .= "from all_posts ";
+		} else if ($filter == 'mine') {
+			$sql .= "from all_posts ";
+			$sql .= "where user_name = :value ";
+		} else if ($filter == 'following') {
+			$sql .= "from all_followed_posts ";
+			$sql .= "where user_name = :value ";
+		} else if ($filter == 'local') {
+			$sql .= "from all_posts ";
+			$sql .= "where user_zip = :value ";
+		}
+		$sql .= "order by post_date desc";
 		$rs = $this->conn->prepare($sql);
-		$rs->bindparam(":user_name", $curr_user);
-		$echo $sql;
+		if ($filter != 'all')
+			$rs->bindparam(":value", $value);
+		echo $sql;
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {
