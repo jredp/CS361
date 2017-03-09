@@ -66,9 +66,12 @@ class post {
 		$sql = "SELECT p.post_date, p.content, p.post_img ";
 		$sql .= "from posts p join users u on p.user_id = u.user_id ";
 		$sql .= "where u.user_name = :user_name ";
+		if ($filter) {
+			$sql .= "and " . 
 		$sql .= "order by p.post_date desc";
 		$rs = $this->conn->prepare($sql);
 		$rs->bindparam(":user_name", $curr_user);
+		$echo $sql;
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {

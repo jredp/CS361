@@ -51,12 +51,23 @@ CREATE TABLE created_posts (
 	FOREIGN KEY (post_id) REFERENCES posts(post_id)	
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- could be a useful view for the landing page
+create view all_posts
+as
+select u.user_id, p.post_id, p.post_date, p.content, p.post_img, f.post_id followed, u.user_zip
+from users u
+left join posts p on p.user_id = u.user_id
+left join followed_posts f on u.user_id = f.user_id;
+
 -- i think there may be an issue with using an int for zip code. this one is for boston
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
 values ('test1', 'test', 'one', 'password', 'test1@test.com', 01841);
 
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
 values ('test2', 'test', 'two', 'password', 'test2@test.com', 90210);
+
+insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
+values ('test3', 'test', 'three', 'password', 'test3@test.com', 55105);
 
 insert into posts (content, user_id, post_img)
 values ('my first post', (select user_id from users where user_name = 'test1'), 'post1_img.jpg');
@@ -66,6 +77,10 @@ values ('my second post has more content than my first', (select user_id from us
 
 insert into posts (content, user_id)
 values ('this is a post from the second user', (select user_id from users where user_name = 'test2'));
+
+insert into followed_posts (user_id, post_id)
+values ((select user_id from users where user_name = 'test1'),
+	(select post_id from posts where content = 'this is a post from the second user'));
 
 insert into followed_posts (user_id, post_id)
 values ((select user_id from users where user_name = 'test2'),

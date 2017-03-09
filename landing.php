@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_name'])) {
 <script>
 function showPosts(cat) {
 	if (cat == "") {
-		document.getElementById("post-list").innerHTML = "";
+		/* document.getElementById("post-list").innerHTML = ""; */
 		return;
 	} else {
 		if (window.XMLHttpRequest) {
