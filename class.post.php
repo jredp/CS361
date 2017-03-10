@@ -35,20 +35,6 @@ class post {
 		}
 	}
 
-	function getSelect($selIdx = NULL) {
-		$list = '<option value="">select species</option>';
-		$list .= '<option value="all">all species</option>';
-		$rs = $conn->query("select species from pets group by 1 order by 1");
-		while ($row = $rs->fetch_assoc()) {
-			$list .= '<option value="' . $row['species'] . '"';
-			if ($selIdx == $row['species']) {
-				$list .= ' selected';
-			}
-			$list .= '>' . $row['species'] . '</option>';
-		}
-		echo $list;
-	} 
-
 	public function delete($id) {
 		try {
 			$rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
