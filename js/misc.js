@@ -1,6 +1,6 @@
 function showPosts(cat) {
 	if (cat == "") {
-		document.getElementById("post-list").innerHTML = "";
+		// document.getElementById("post-list").innerHTML = "";
 		return;
 	} else {
 		if (window.XMLHttpRequest) {
@@ -17,3 +17,11 @@ function showPosts(cat) {
 		xmlhttp.send();
 	}
 }
+
+// TODO: make this operational
+function searchPosts() {
+	var term = document.getElementById('txtSearch').value;
+	alert(term);
+}
+
+document.onload = showPosts('mine');
