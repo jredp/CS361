@@ -11,8 +11,13 @@ if (!isset($_SESSION['user_name'])) {
 <link rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-<p>need to create a form with image upload, see the task list for info</p>
-<p><a href="landing.php">back</a> to the landing page</p>
-<p><a href="logout.php">logout</a></p>
+<?php
+session_unset();
+session_destroy();
+?>
+<p>you're now logged out!
+<?php echo $_GET['pid']; ?>
+</p>
+<p><a href="landing.php">back</a> to the landing page (should take you back to the login/reg'n page)</p>
 </body>
 </html> 
