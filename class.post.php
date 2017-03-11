@@ -50,8 +50,8 @@ class post {
 	// prints table of data with two icon links for edit and delete
 	// $filter values: mine, following, local, all
 	// TODO: refactor
-	public function view($filter, $value=NULL) {
-		$sql = "SELECT post_date, content, post_img ";
+	public function view($curr_user, $filter, $value=NULL) {
+		$sql = "SELECT post_id, user_name, post_date, content, post_img ";
 
 		if ($filter == 'all') {
 			$sql .= "from all_posts ";
@@ -73,7 +73,7 @@ class post {
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {
-			$html = '<table border="1"><thead><tr><th>content</th><th>image</th><th>date</th></tr></thead>';
+			$html = '<table border="1"><thead><tr><th>content</th><th>image</th><th>date</th><th>action</th></tr></thead>';
 			$html .= '<tbody>';
 			while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
 				if (!is_null($row['content']) && strlen(trim($row['content'])) > 0) {
@@ -85,11 +85,17 @@ class post {
 						$html .= '<td>&nbsp;</td>';
 					}
 					$html .= '<td>' . $row['post_date'] . '</td>';
+					if ($curr_user == $row['user_name']) {
+						$html .= '<td><a href="edit-post.php?pid=' . $row['post_id'] . '">edit post</a>&nbsp;&nbsp;';
+						$html .= '<a href="delete-post.php?pid=' . $row['post_id'] . '">delete post</a>';
+					} else {
+						$html .= '<td>&nbsp;</td>';
+					}
 					$html .= '</tr>';
 				}
 			}
 		} else {
-			$html= "<tr><td colspan='3' class='text-center'>no records found</td></tr>";
+			$html= '<tr><td colspan="4" class="text-center">no records found</td></tr>';
 		}
 		return $html;
 	}

@@ -9,7 +9,7 @@ x - insert, update, delete, view
 landing page
   x - get session vars
   x - dropdown list filter
-  add link in posts table for edit, delete
+  x - add link in posts table for edit, delete
   posts form - create
     hidden field for userid
     content
