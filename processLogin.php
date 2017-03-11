@@ -66,8 +66,8 @@
                         $_SESSION['user_zip']  = $row['user_zip'];
                         $_SESSION['user_level'] = $row['user_level'];
                     }
-                     
-                    echo 'Welcome, ' . $_SESSION['user_name'] . '. <a href="landing.php">Proceed to the forum overview</a>.';
+                    // redirect to landing page if login successful 
+										header("Location: landing.php");
                 }
             }
         }

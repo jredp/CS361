@@ -36,6 +36,7 @@
         $result = $statement->execute();
 
         if ($result) {
+					  // TODO: need to add the session variables and then redirect, see processLogin for example
             echo "<h3><br><p>Record added successfully</h3>";
             echo 'Welcome, ' . $uname . '. <a href="index.php">would auto-forward to landing here</a>.';
         } 

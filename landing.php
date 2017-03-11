@@ -14,6 +14,9 @@ if (!isset($_SESSION['user_name'])) {
 <link rel="stylesheet" type="text/css" href="">
 </head>
 <body> 
+<!-- TODO: add query string variable when redirecting from login or reg'n page so this message only shows up the first time -->
+<p>welcome back,
+<?php echo $_SESSION['user_name']; ?> 
 <table>
 <tr>
 <form method="post">
