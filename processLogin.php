@@ -1,5 +1,5 @@
 <?php
-		session_start();
+	session_start();
     //Turn on error reporting
     ini_set('display_errors', 'On');
 		//Connects to the database
@@ -31,7 +31,7 @@
             echo 'Fields are not filled in correctly..';
             echo '<ul>';
             foreach($errors as $key => $value) {
-                echo '<li>' . $value . '</li>'; /* this generates a nice error list */
+                echo '<li>' . $value . '</li>'; 
             }
             echo '</ul>';
         }
@@ -41,10 +41,8 @@
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'"; //sha1($pass) is for hashing
                          
-            //$result = mysqli_query($mysqli, $sql);
             $result = $mysqli->query($sql);
-            if(!$result) {
-                //something went wrong, display the error
+            if(!$result) {               
                 echo '<br><span> user_name: </span>'.$uname;
                 echo '<br><span> user_pass: </span>'.$pass;
                 echo '<br><span> sql: </span>'.$sql;
@@ -67,7 +65,7 @@
                         $_SESSION['user_level'] = $row['user_level'];
                     }
                     // redirect to landing page if login successful 
-										header("Location: landing.php");
+					header("Location: landing.php");
                 }
             }
         }
