@@ -10,6 +10,7 @@ landing page
   x - get session vars
   x - dropdown list filter
   x - add link in posts table for edit, delete
+  change orientation of posts per Bryce's feedback 11 Mar
   posts form - create
     hidden field for userid
     content
