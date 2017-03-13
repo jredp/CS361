@@ -1,15 +1,24 @@
 <?php
 
+/*
+ * class to manage posts
+ * two member variables: connection string, and image directory
+ * just normal crud, with removing user uploaded files during edit
+ * and delete
+ */
+
 class post {
 	private $conn;
 	private $img_dir;
 
-	// img_dir is where the user's images are stored
 	function __construct($dbcn) {
 		$this->conn = $dbcn;
 		$this->img_dir = 'postImages/';
 	}
 
+	/*
+	 * create a post for a given user
+	 */
 	public function create($username, $content, $imgurl) {
 		try {
 			$sql = "INSERT INTO posts (user_id, content, post_img) VALUES ";
@@ -31,6 +40,9 @@ class post {
 		return $this->img_dir;
 	}
 
+	/*
+	 * get post information to populate edit and delete forms
+	 */
 	public function getId($id) {
 		$rs = $this->conn->prepare("select * from posts where post_id = :id");
 		$rs->bindparam(":id", $id);
@@ -39,6 +51,9 @@ class post {
 		return $edit_row;
 	}
 
+	/*
+	 * update a post and the associated image, if one exists
+	 */
 	public function update($post_id, $content, $imgurl, $oldimg=NULL) {
 		try {
 			$sql = "UPDATE posts SET content = :content, ";
@@ -59,6 +74,9 @@ class post {
 		}
 	}
 
+	/*
+	 * delete a post and the associated image, if one exists
+	 */
 	public function delete($id, $post_img) {
 		try {
 			$rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
@@ -73,9 +91,11 @@ class post {
 		} 
 	}
 
-	// prints table of data with two icon links for edit and delete
-	// $filter values: mine, following, local, all
-	// TODO: refactor
+	/* 
+	 * prints table of data with two links for edit and delete
+	 * $filter values: mine, following, local, all
+	 * TODO: refactor
+	 */
 	public function view($curr_user, $filter, $value=NULL) {
 		$sql = "SELECT post_id, user_name, post_date, content, post_img ";
 
