@@ -2,7 +2,7 @@
 
 /*
  * class to manage posts
- * two member variables: connection string, and image directory
+ * three member variables: connection string, valid file extensions, and image directory
  * just normal crud, with removing user uploaded files during edit
  * and delete
  */
@@ -10,10 +10,12 @@
 class post {
 	private $conn;
 	private $img_dir;
+	private $valid_files;
 
 	function __construct($dbcn) {
 		$this->conn = $dbcn;
 		$this->img_dir = 'postImages/';
+		$this->valid_files = array('.png', '.jpeg', '.jpg', '.gif');
 	}
 
 	/*
@@ -38,6 +40,10 @@ class post {
 
 	public function getImgDir() {
 		return $this->img_dir;
+	}
+
+	public function getValidFileTypes() {
+		return $this->valid_files;
 	}
 
 	/*

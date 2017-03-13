@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 	$filename = null;
 	$oldimg = null;
 	$upload_dir = $mypost->getImgDir();
-	$valid_files = array('.png', '.jpeg', '.jpg', '.gif');
+	$valid_files = $mypost->getValidFileTypes();
 	// just a guess, didn't do a lot of research on bytes -> mb conversion
 	$max_size = 1024000;
 	if ($_FILES['post_image']['error'] == 0) {
