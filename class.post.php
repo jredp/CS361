@@ -2,9 +2,12 @@
 
 class post {
     private $conn;
+    private $img_dir;
 
+    // img_dir is where the user's images are stored
     function __construct($dbcn) {
 	$this->conn = $dbcn;
+	$this->img_dir = 'postImages/';
     }
 
     public function create($username, $content, $imgurl) {
@@ -24,6 +27,14 @@ class post {
 	}
     }
 
+    public function getId($id) {
+	$rs = $this->conn->prepare("select * from posts where post_id = :id");
+	$rs->bindparam(":id", $id);
+	$rs->execute();
+	$edit_row = $rs->fetch(PDO::FETCH_ASSOC);
+	return $edit_row;
+    }
+
     public function update($post_id, $content) {
 	try {
 	    $sql = "UPDATE posts SET content=:content WHERE post_id=:post_id;";
@@ -38,11 +49,13 @@ class post {
 	}
     }
 
-    public function delete($id) {
+    public function delete($id, $post_img) {
 	try {
 	    $rs = $this->conn->prepare("DELETE FROM posts WHERE post_id=:id");
 	    $rs->bindparam(":id", $id);
 	    $rs->execute();
+	    $image = realpath($this->img_dir . $post_img);
+	    if (file_exists($image)) unlink($image);
 	    return true;
 	} catch (PDOException $e) {
 	    echo $e->getMessage();
@@ -81,14 +94,17 @@ class post {
 	    while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
 		// check for content, to avoid showing rows from the view that are blank for this user
 		if (!is_null($row['content']) && strlen(trim($row['content'])) > 0) {
+		    // first row is image if there is one
 		    $html .= '<tr>';
 		    if (!is_null($row['post_img']) && strlen(trim($row['post_img'])) > 0) {
-			$html .= '<td colspan="2"><img src="postImages/' . $row['post_img'] . '"></td>';
+			$html .= '<td colspan="2"><img src="' . $this->img_dir . $row['post_img'] . '"></td>';
 		    } else {
 			$html .= '<td colspan="2">&nbsp;</td>';
 		    }
 		    $html .= '<tr><td colspan="2">&nbsp;</td></tr>';
+		    // next row is content
 		    $html .= '<tr><td colspan="2">' . $row['content'] . '</td></tr>';
+		    // if the user owns the post show edit / delete links
 		    $html .= '<tr>';
 		    if ($curr_user == $row['user_name']) {
 			$html .= '<td><a href="edit-post.php?pid=' . $row['post_id'] . '">edit post</a>&nbsp;&nbsp;';
@@ -96,6 +112,7 @@ class post {
 		    } else {
 			$html .= '<td>&nbsp;</td>';
 		    }
+		    // show the create date
 		    $html .= '<td align="right"><em>original post date: ' . $row['post_date'] . '</em></tr>';
 		    $html .= '<tr><td><hr align="center" width="100%"></td></tr>';
 		}

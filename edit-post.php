@@ -1,8 +1,11 @@
 <?php
 session_start();
+include_once 'dbcn.php';
+
 if (!isset($_SESSION['user_name'])) {
 	header("Location: index.php?loggedin=no");
 }
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -11,10 +14,8 @@ if (!isset($_SESSION['user_name'])) {
 <link rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-<p>need to create a form to edit post with id:
+<p><a href="landing.php">cancel</a> go back to the landing page&nbsp;&nbsp;&nbsp;
+<a href="logout.php">logout</a></p>
 <?php echo $_GET['pid']; ?>
-</p>
-<p><a href="landing.php">back</a> to the landing page</p>
-<p><a href="logout.php">logout</a></p>
 </body>
 </html> 

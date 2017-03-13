@@ -4,7 +4,7 @@ include("inc/header.php"); ?>
 
 	<div class = "message">
 	<?php 
-		if($msg) {
+		if(isset($msg)) {
 			echo $msg;
 		}
 	?>
