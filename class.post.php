@@ -35,13 +35,19 @@ class post {
 	return $edit_row;
     }
 
-    public function update($post_id, $content) {
+    public function update($post_id, $content, $imgurl, $oldimg=NULL) {
 	try {
-	    $sql = "UPDATE posts SET content=:content WHERE post_id=:post_id;";
+	    $sql = "UPDATE posts SET content = :content, ";
+	    $sql .= "post_img = :post_img WHERE post_id=:post_id;";
 	    $rs = $this->conn->prepare($sql);
 	    $rs->bindparam(":post_id", $post_id);
 	    $rs->bindparam(":content", $content);
+	    $rs->bindparam(":post_img", $imgurl);
 	    $rs->execute();
+	    if (!is_null($oldimg)) {
+		$image = realpath($this->img_dir . $oldimg);
+		if (file_exists($image)) unlink($image);
+	    }
 	    return true;
 	} catch (PDOException $e) {
 	    echo $e->getMessage();
