@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once 'dbcn.php';
+
 if (!isset($_SESSION['user_name'])) {
 	header("Location: index.php?loggedin=no");
 }
@@ -14,11 +16,14 @@ if (!isset($_SESSION['user_name'])) {
 <link rel="stylesheet" type="text/css" href="">
 </head>
 <body> 
-<!-- TODO: add query string variable when redirecting from login or reg'n page so this message only shows up the first time -->
-<p>welcome back,
-<?php echo $_SESSION['user_name']; ?> 
-&nbsp;&nbsp;&nbsp;<a href="logout.php">logout</a>
-</p>
+<?php 
+if (isset($_GET['action'])) {
+    if (isset($_GET['status']))
+	echo '<p>' . printMsg($_GET['action'], $_GET['status']) . '</p>';
+} else {
+    echo '<p>welcome back, ' . $_SESSION['user_name'] . '</p>';
+}
+?>
 <table>
 <tr>
 <form method="post">
@@ -38,7 +43,7 @@ if (!isset($_SESSION['user_name'])) {
 <td><button id="btn-search" name="btn-search" onclick="searchPosts()">search</button></td>
 </form>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td><a href="create-post.php">create new post</a></td>
+<td><a href="create-post.php">create new post</a>&nbsp;&nbsp;&nbsp;<a href="logout.php">logout</a></td>
 </tr>
 </table>
 <br>
