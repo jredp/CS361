@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_name'])) {
 
 if (isset($_POST['submit'])) {
 	$status = '';
-	if (!isset($_POST['conent']) || $_POST['conent'] == '')
+	if (!isset($_POST['content']) || $_POST['content'] == '')
 		$status = 'post content is required';
 	$filename = null;
 	$upload_dir = $mypost->getImgDir();
