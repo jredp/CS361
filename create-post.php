@@ -3,48 +3,48 @@ session_start();
 include_once 'dbcn.php';
 
 if (!isset($_SESSION['user_name'])) {
-    header("Location: index.php?loggedin=no");
+	header("Location: index.php?loggedin=no");
 }
 
 if (isset($_POST['submit'])) {
-    $status = '';
-    if (!isset($_POST['conent']) || $_POST['conent'] == '')
-	$status = 'post content is required';
-    $filename = null;
-    $upload_dir = 'postImages/';
-    $valid_files = array('.png', '.jpeg', '.jpg', '.gif');
-    // just a guess, didn't do a lot of research on bytes -> mb conversion
-    $max_size = 1024000;
-    if ($_FILES['post_image']['error'] == 0) {
+	$status = '';
+	if (!isset($_POST['conent']) || $_POST['conent'] == '')
+		$status = 'post content is required';
+	$filename = null;
+	$upload_dir = $mypost->getImgDir();
+	$valid_files = array('.png', '.jpeg', '.jpg', '.gif');
+	// just a guess, didn't do a lot of research on bytes -> mb conversion
+	$max_size = 1024000;
+	if ($_FILES['post_image']['error'] == 0) {
 
-	$filename = $upload_dir . $_FILES['post_image']['name'];
-	$img_type = '.' . pathinfo($filename, PATHINFO_EXTENSION);
+		$filename = $upload_dir . $_FILES['post_image']['name'];
+		$img_type = '.' . pathinfo($filename, PATHINFO_EXTENSION);
 
-	if (!in_array(strtolower($img_type), $valid_files)) {
-	    $status = 'invalid image filetype';
-	} else if ($_FILES['post_image']['size'] > $max_size) {
-	    $status = 'image file over 1 Mb limit';
-	} else {
-	    // assign unique name to image
-	    $filename = $_SESSION['user_name'] . '_' . date("YmdHis") . $img_type;
-	    if (move_uploaded_file($_FILES['post_image']['tmp_name'], $upload_dir . $filename)) {
-	    } else {
-		$status = 'error uploading file';
-	    }
+		if (!in_array(strtolower($img_type), $valid_files)) {
+			$status = 'invalid image filetype';
+		} else if ($_FILES['post_image']['size'] > $max_size) {
+			$status = 'image file over 1 Mb limit';
+		} else {
+			// assign unique name to image
+			$filename = $_SESSION['user_name'] . '_' . date("YmdHis") . $img_type;
+			if (move_uploaded_file($_FILES['post_image']['tmp_name'], $upload_dir . $filename)) {
+			} else {
+				$status = 'error uploading file';
+			}
+		}
+
 	}
 
-    }
-
-    if ($status == '') {
-	if ($mypost->create($_SESSION['user_name'], $_POST['content'], $filename)) {
-	    $status = 'success';
+	if ($status == '') {
+		if ($mypost->create($_SESSION['user_name'], $_POST['content'], $filename)) {
+			$status = 'success';
+		} else {
+			$status = 'fail';
+		}
+		header("Location: landing.php?action=insert&status=".$status);
 	} else {
-	    $status = 'fail';
+		echo $status;
 	}
-	header("Location: landing.php?action=insert&status=".$status);
-    } else {
-	echo $status;
-    }
 }
 ?>
 <!DOCTYPE html>

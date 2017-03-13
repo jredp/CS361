@@ -34,7 +34,7 @@ if (isset($_GET['pid'])) {
 <tr><td>post image: </td><td>
 <?php
     if (!is_null($post_img) && strlen(trim($post_img)) > 0) {
-	echo '<img src="postImages/' . $post_img . '"></td>';
+	echo '<img src="' . $mypost->getImgDir() . $post_img . '"></td>';
     } else {
 	echo '&nbsp;</td>';
     }
