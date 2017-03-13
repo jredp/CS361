@@ -16,7 +16,13 @@ if (!isset($_SESSION['user_name'])) {
 <body> 
 <!-- TODO: add query string variable when redirecting from login or reg'n page so this message only shows up the first time -->
 <p>welcome back,
-<?php echo $_SESSION['user_name']; ?> 
+<?php 
+if (isset($_GET['action'])) {
+    echo $msg;
+} else {
+    echo $_SESSION['user_name'];
+}
+?>
 &nbsp;&nbsp;&nbsp;<a href="logout.php">logout</a>
 </p>
 <table>
