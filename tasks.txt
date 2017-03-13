@@ -10,16 +10,17 @@ landing page
   x - get session vars
   x - dropdown list filter
   x - add link in posts table for edit, delete
-  change orientation of posts per Bryce's feedback 11 Mar
-  posts form - create
-    hidden field for userid
-    content
-    image upload
-    save to database 
-  posts form - edit
-  posts for delete
+  x - change orientation of posts per Bryce's feedback 11 Mar
+  x - posts form - create
+    x - hidden field for userid
+    x - content
+    x - image upload
+    x - save to database 
+  x - posts form - edit
+  x - posts for delete
 
-http://stackoverflow.com/questions/4422210/how-to-add-simple-image-upload-to-a-form
+follow posts functionality
 
-write tests
+vote for posts functionality
 
+write tests - wip
