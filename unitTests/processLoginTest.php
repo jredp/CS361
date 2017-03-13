@@ -17,7 +17,7 @@
 		assert_options(ASSERT_CALLBACK, 'my_assert_handler');	
     }
     
-	//---------- TESTS ------------	
+	//---------- Login TESTS ------------	
 		//Test 1: Username is blank
 		function testUserName(){
 	   	  	$uname ; //empty
@@ -37,30 +37,30 @@
 		//Test 3: Username not in the system
 		function testUserNotIn(){
 		    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
-	    	$uname = "test111"; //Not in
+	    	$uname = "test111"; //Not in DB
 	    	$pass = "abc123";
 	    	$sql = "SELECT user_name, user_zip, user_level 
                     FROM users 
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
-			assert($result), '<br>You have supplied a wrong user/password combination. Please try again.');
+			assert(($result->num_rows > 0), '<br>You have supplied a wrong user/password combination. Please try again.');
 		}
 		testUserNotIn();
 		
 		//Test 4: Wrong Password
-		function testUserNotIn(){
+		function testUserWrongPass(){
 		    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
-	    	$uname = "test1"; //Not in
-	    	$pass = "abc123";
+	    	$uname = "test1";
+	    	$pass = "abc123"; //Wrong Pass
 	    	$sql = "SELECT user_name, user_zip, user_level 
                     FROM users 
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
-			assert($result), '<br>You have supplied a wrong user/password combination. Please try again.');
+			assert(($result->num_rows > 0), '<br>You have supplied a wrong user/password combination. Please try again.');
 		}
-		testUserNotIn();
+		testUserWrongPass();
 		
 	unitTest();
 ?>
