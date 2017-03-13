@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 	$filename = $upload_dir . $_FILES['post_image']['name'];
 	$img_type = '.' . pathinfo($filename, PATHINFO_EXTENSION);
 
-	if (!in_array($img_type, $valid_files)) {
+	if (!in_array(strtolower($img_type), $valid_files)) {
 	    $status = 'invalid image filetype';
 	} else if ($_FILES['post_image']['size'] > $max_size) {
 	    $status = 'image file over 1 Mb limit';
