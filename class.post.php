@@ -124,7 +124,7 @@ class post {
 					}
 					// show the create date
 					$html .= '<td align="right"><em>original post date: ' . $row['post_date'] . '</em></tr>';
-					$html .= '<tr><td><hr align="center" width="100%"></td></tr>';
+					$html .= '<tr><td colspan="2"><hr align="center" width="100%"></td></tr>';
 				}
 			}
 		} else {
