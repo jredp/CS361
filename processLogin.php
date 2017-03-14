@@ -18,7 +18,7 @@
 
     if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
         echo 'You are already signed in, you can <a href="signout.php">sign out</a> if you want.';
-        echo 'Continue to landing page here. <a href="landing.php">Landin Page</a>'
+        echo 'Continue to landing page here. <a href="landing.php">Landin Page</a>';
     }
     else {
         $errors = array();         
