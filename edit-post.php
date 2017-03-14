@@ -61,42 +61,48 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" type="text/css" href="">
-</head>
-<body>
-<p><a href="landing.php">cancel</a> go back to the landing page&nbsp;&nbsp;&nbsp;
-<a href="logout.php">logout</a></p>
-<?php
-// populate the form
-if (isset($_GET['pid']))
-	extract($mypost->getId($_GET['pid']));
-?>
-<form enctype="multipart/form-data" method="post">
-<table>
-<tr>
-<td valign="top">update post:</td><td><textarea name="content" cols="40" rows="5"><?php echo $content; ?></textarea></td>
-</tr>
-<tr>
-<td>current post image: </td>
-<?php
-if (!is_null($post_img) && strlen(trim($post_img)) > 0) {
-	echo '<td><img src="' . $mypost->getImgDir() . $post_img . '"></td>';
-	echo '<input type="hidden" name="old_image" value="' . $post_img . '">';
-} else {
-	echo '<td>&nbsp;</td>';
-}
-?>
-<tr>
-<td>upload new image:</td><td><input type="file" name="post_image"></td>
-<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-</tr>
-<tr>
-<td colspan="2" align="center"><input type="submit" name="submit" value="edit post"></td>
-</tr>
-</table>
-</form>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="">
+	</head>
+	<body>
+		<p>
+			<a href="landing.php">cancel</a> go back to the landing page&nbsp;&nbsp;&nbsp;
+			<a href="logout.php">logout</a>
+		</p>
+
+		<?php
+			// populate the form
+			if (isset($_GET['pid']))
+				extract($mypost->getId($_GET['pid']));
+		?>
+
+		<form enctype="multipart/form-data" method="post">
+		<table>
+			<tr>
+				<td valign="top">update post:</td><td><textarea name="content" cols="40" rows="5"><?php echo $content; ?></textarea></td>
+			</tr>
+			<tr>
+				<td>current post image: </td>
+				<?php
+					if (!is_null($post_img) && strlen(trim($post_img)) > 0) {
+						echo '<td><img src="' . $mypost->getImgDir() . $post_img . '"></td>';
+						echo '<input type="hidden" name="old_image" value="' . $post_img . '">';
+					} else {
+						echo '<td>&nbsp;</td>';
+					}
+				?>
+			<tr>
+				<td>upload new image:</td>
+				<td><input type="file" name="post_image"></td>
+				<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" name="submit" value="edit post"></td>
+			</tr>
+		</table>
+		</form>
+	</body>
 </html> 
