@@ -44,7 +44,8 @@
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
-			assert(($result->num_rows > 0), '<br>You have supplied a wrong user/password combination. Please try again.');
+            $mysqli->close();
+			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.');
 		}
 		testUserNotIn();
 		
@@ -58,9 +59,10 @@
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
-			assert(($result->num_rows > 0), '<br>You have supplied a wrong user/password combination. Please try again.');
+            $mysqli->close();
+			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.');
 		}
-		testUserWrongPass();
-		
+		testUserWrongPass();		
 	unitTest();
+	//$mysqli->close();
 ?>
