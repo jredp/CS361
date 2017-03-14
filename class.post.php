@@ -112,7 +112,7 @@ class post {
 			$sql .= "where user_name = :value ";
 		} else if ($filter == 'following') {
 			$sql .= "from all_followed_posts ";
-			$sql .= "where user_name = :value ";
+			$sql .= "where user_name_follower = :value ";
 		} else if ($filter == 'local') {
 			$sql .= "from all_posts ";
 			$sql .= "where user_zip = :value ";
@@ -145,6 +145,7 @@ class post {
 					if ($curr_user == $row['user_name']) {
 						$html .= '<td><a href="edit-post.php?pid=' . $row['post_id'] . '">edit post</a>&nbsp;&nbsp;';
 						$html .= '<a href="delete-post.php?pid=' . $row['post_id'] . '">delete post</a>';
+					// if user doesn't own the post, show follow/vote options
 					} else {
 						$html .= '<td>&nbsp;</td>';
 					}

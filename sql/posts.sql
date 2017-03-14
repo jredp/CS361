@@ -62,10 +62,12 @@ left join posts p on p.user_id = u.user_id;
 
 create view all_followed_posts
 as
-select u.user_id, u.user_name, p.post_id, p.post_date, p.content, p.post_img
+select u.user_id as user_id_follower, u.user_name as user_name_follower, u2.user_name, p.post_id, p.post_date, p.content, p.post_img
 from users u
 join followed_posts f on u.user_id = f.user_id
-join posts p on f.post_id = p.post_id;
+join posts p on f.post_id = p.post_id
+join users u2 on u2.user_id = p.user_id;
+
 
 -- i think there may be an issue with using an int for zip code. this one is for boston
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
