@@ -26,11 +26,6 @@ if (isset($_GET['action'])) {
     echo '<p>welcome back, ' . $_SESSION['user_name'] . '</p>';
 }
 
-if (isset($_GET['postfilter'])) {
-    
-}
-
-
 if (isset($_POST['follow'])) {
     $status = '';
     if ($mypost->follow($_POST['post_id'], $_POST['user_id'])) {

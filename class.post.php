@@ -200,9 +200,9 @@ class post {
 						$html .= '<input type="hidden" name="user_id" value="' . $user_id . '">';
 						$html .= '<input type="hidden" name="post_id" value="' . $row['post_id'] . '">';						
 						if ($rs_follow->rowCount() > 0) {
-							$html .= '<button type="submit" name="unfollow" value="unfollow" onsubmit="showPosts(\'all\')">unfollow</button>';
+							$html .= '<button type="submit" name="unfollow" value="unfollow">unfollow</button>';
 						} else {
-							$html .= '<button type="submit" name="follow" value="follow" onsubmit="showPosts(\'all\')">follow</button>';
+							$html .= '<button type="submit" name="follow" value="follow">follow</button>';
 						}
 						$html .= '</form>';
 					}
@@ -215,7 +215,6 @@ class post {
 			$html= '<tr><td colspan="4" class="text-center">no records found</td></tr>';
 		}
 		$html .= '</tbody></table>';
-		debug_to_console($html);
 		return $html;
 	}
 }
