@@ -15,7 +15,7 @@ CREATE TABLE users (
 	last_name 	VARCHAR(50) NOT NULL,				
 	user_pass 	VARCHAR(25) NOT NULL,				
 	user_email	VARCHAR(50) NOT NULL,				
-	user_zip 	INT(5) NOT NULL,				
+	user_zip 	varchar(5) NOT NULL,				
 	user_level 	INT(1) DEFAULT 1, 					
 	create_dt 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	UNIQUE INDEX user_name_unique (user_name),
@@ -30,7 +30,7 @@ CREATE TABLE posts (
 	user_id 	int not null,
 	post_img 	varchar(255),
 	PRIMARY KEY (post_id),
-	foreign key (user_id) references users(user_id)
+	foreign key (user_id) references users(user_id) on delete cascade
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Followed posts
@@ -38,8 +38,8 @@ CREATE TABLE followed_posts (
 	user_id INT(11) NOT NULL,
 	post_id INT(11) NOT NULL,
 	PRIMARY KEY (user_id, post_id),
-	FOREIGN KEY (user_id) REFERENCES users(user_id),
-	FOREIGN KEY (post_id) REFERENCES posts(post_id)	
+	FOREIGN KEY (user_id) REFERENCES users(user_id) on delete cascade,
+	FOREIGN KEY (post_id) REFERENCES posts(post_id) on delete cascade	
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- could be useful views for the landing page
