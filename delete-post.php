@@ -3,17 +3,19 @@ session_start();
 include_once 'dbcn.php';
 
 if (!isset($_SESSION['user_name'])) {
-	header("Location: index.php?loggedin=no");
+	// header("Location: index.php?loggedin=no");
+    echo "<script>window.location = 'index.php?loggedin=no'</script>";
 }
 
 if (isset($_POST['delete'])) {
     $status = '';
     if ($mypost->delete($_POST['id'], $_POST['post_img'])) {
-	$status = 'success';
+	   $status = 'success';
     } else {
-	$status = 'fail';
+	   $status = 'fail';
     }
-    header("Location: landing.php?action=delete&status=".$status);
+    // header("Location: landing.php?action=delete&status=".$status);
+    echo "<script>window.location = 'landing.php?action=delete&status=" . $status . "'</script>";
 }
 ?>
 <!DOCTYPE html>

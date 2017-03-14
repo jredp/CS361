@@ -1,7 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_name'])) {
-	header("Location: index.php?loggedin=no");
+	// header("Location: index.php?loggedin=no");
+	echo "<script>window.location = 'index.php?loggedin=no'</script>";
 }
 ?>
 <!DOCTYPE html>

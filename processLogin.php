@@ -65,7 +65,8 @@
                         $_SESSION['user_level'] = $row['user_level'];
                     }
                     // redirect to landing page if login successful 
-					header("Location: landing.php");
+					// header("Location: landing.php");
+                    echo "<script>window.location = 'landing.php'</script>";
                 }
             }
         }

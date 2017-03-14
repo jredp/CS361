@@ -3,7 +3,8 @@ session_start();
 include_once 'dbcn.php';
 
 if (!isset($_SESSION['user_name'])) {
-	header("Location: index.php?loggedin=no");
+	// header("Location: index.php?loggedin=no");
+	echo "<script>window.location = 'index.php?loggedin=no'</script>";
 }
 
 ?>
@@ -19,10 +20,37 @@ if (!isset($_SESSION['user_name'])) {
 <?php 
 if (isset($_GET['action'])) {
     if (isset($_GET['status']))
-	echo '<p>' . printMsg($_GET['action'], $_GET['status']) . '</p>';
+		echo '<p>' . $_GET['action'] . " " . $_GET['status'] . '</p>';
+        // echo '<p>' . printMsg($_GET['action'], $_GET['status']) . '</p>';
 } else {
     echo '<p>welcome back, ' . $_SESSION['user_name'] . '</p>';
 }
+
+if (isset($_GET['postfilter'])) {
+    
+}
+
+
+if (isset($_POST['follow'])) {
+    $status = '';
+    if ($mypost->follow($_POST['post_id'], $_POST['user_id'])) {
+		$status = 'success';
+    } else {
+		$status = 'fail';
+    }
+    echo "<script>window.location = 'landing.php?action=follow&status=" . $status . "'</script>";
+}
+
+if (isset($_POST['unfollow'])) {
+    $status = '';
+    if ($mypost->unfollow($_POST['post_id'], $_POST['user_id'])) {
+		$status = 'success';
+    } else {
+		$status = 'fail';
+    }
+    echo "<script>window.location = 'landing.php?action=unfollow&status=" . $status . "'</script>";
+}
+
 ?>
 <table>
 <tr>

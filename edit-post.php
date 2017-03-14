@@ -3,7 +3,8 @@ session_start();
 include_once 'dbcn.php';
 
 if (!isset($_SESSION['user_name'])) {
-	header("Location: index.php?loggedin=no");
+	// header("Location: index.php?loggedin=no");
+	echo "<script>window.location = 'index.php?loggedin=no'</script>";
 	exit;
 }
 
@@ -51,7 +52,8 @@ if (isset($_POST['submit'])) {
 		} else {
 			$status = 'fail';
 		}
-		header("Location: landing.php?action=update&status=".$status);
+		// header("Location: landing.php?action=update&status=".$status);
+		echo "<script>window.location = 'landing.php?action=update&status=" . $status . "'</script>";
 		exit;
 	} else {
 		echo $status;

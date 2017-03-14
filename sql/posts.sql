@@ -42,17 +42,6 @@ CREATE TABLE followed_posts (
 	FOREIGN KEY (post_id) REFERENCES posts(post_id)	
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Created posts
--- I don't think we need this table, userid should be attribute of posts
--- a user can have many posts, but a post can have only one 'creator'
-CREATE TABLE created_posts (
-	user_id INT(11) NOT NULL,
-	post_id INT(11) NOT NULL,
-	PRIMARY KEY (user_id, post_id),
-	FOREIGN KEY (user_id) REFERENCES users(user_id),
-	FOREIGN KEY (post_id) REFERENCES posts(post_id)	
-) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- could be useful views for the landing page
 create view all_posts
 as
@@ -62,7 +51,7 @@ left join posts p on p.user_id = u.user_id;
 
 create view all_followed_posts
 as
-select u.user_id as user_id_follower, u.user_name as user_name_follower, u2.user_name, p.post_id, p.post_date, p.content, p.post_img
+select u.user_id, u.user_name, u2.user_name as user_name_author, p.post_id, p.post_date, p.content, p.post_img
 from users u
 join followed_posts f on u.user_id = f.user_id
 join posts p on f.post_id = p.post_id
@@ -87,6 +76,9 @@ values ('my second post has more content than my first', (select user_id from us
 
 insert into posts (content, user_id)
 values ('this is a post from the second user', (select user_id from users where user_name = 'test2'));
+
+insert into posts (content, user_id)
+values ('another post from the second user', (select user_id from users where user_name = 'test2'));
 
 insert into followed_posts (user_id, post_id)
 values ((select user_id from users where user_name = 'test1'),
