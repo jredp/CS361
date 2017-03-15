@@ -12,8 +12,9 @@ class reply {
 		$this->conn = $dbcn;
 	}
 
-	//create a reply
-	public function createReply($username, $content) {
+	//create a reply 
+	//*** THIS NEEDS TO GET post_id FROM THE PARENT or SOMEWHERE upon REPLY click ***///
+	public function createReply($username, $content, $postid) {
 		try {
 			$sql = "INSERT INTO reply_posts (user_id, content, post_id) VALUES ";
 			$sql .= "((select user_id from users where user_name = :user_name), ";
@@ -21,7 +22,7 @@ class reply {
 			$rs = $this->conn->prepare($sql);
 			$rs->bindparam(":user_name", $username);
 			$rs->bindparam(":content", $content);
-			$rs->bindparam(":post_id", $postid);
+			$rs->bindparam(":post_id", $postid); //Get this from somewhere!
 			$rs->execute();
 			return true;
 		} catch (PDOException $e) {
@@ -30,9 +31,9 @@ class reply {
 		}
 	}
 	
-	//get replies based on the parent post_id and order by reply_date
+	//get single reply for edit and delete form
 	public function getReplyId($id) {
-		$rs = $this->conn->prepare("select * from reply_posts where post_id = :id order by reply_date");
+		$rs = $this->conn->prepare("select * from reply_posts where reply_id = :id");
 		$rs->bindparam(":id", $id);
 		$rs->execute();
 		$edit_row = $rs->fetch(PDO::FETCH_ASSOC);
@@ -73,6 +74,13 @@ class reply {
 //-------------------------------------
 	/* 
 	 Keeping this here from class.posts to be able to build a view replies portion
+	 Basically something like this:
+	
+	select r.content, r.reply_date, u.user_name
+	from reply_posts r
+	inner join users u on u.user_id = r.user_id
+	order by r.reply_date desc
+
 	 */
 //-------------------------------------
 	public function viewReply($curr_user, $filter, $value=NULL) {
