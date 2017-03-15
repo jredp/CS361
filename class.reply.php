@@ -30,7 +30,7 @@ class reply {
 		}
 	}
 	
-	//get replies based on post_id and order by reply_date
+	//get replies based on the parent post_id and order by reply_date
 	public function getReplyId($id) {
 		$rs = $this->conn->prepare("select * from reply_posts where post_id = :id order by reply_date");
 		$rs->bindparam(":id", $id);
@@ -69,11 +69,12 @@ class reply {
 		} 
 	}
 
+
+//-------------------------------------
 	/* 
-	 * prints table of data with two links for edit and delete
-	 * $filter values: mine, following, local, all
-	 * TODO: refactor
+	 Keeping this here from class.posts to be able to build a view replies portion
 	 */
+//-------------------------------------
 	public function viewReply($curr_user, $filter, $value=NULL) {
 		// Get current user's ID
 		$sql = "SELECT * from users WHERE user_name = :user_name";
