@@ -4,6 +4,7 @@ drop table if exists created_posts;
 drop table if exists followed_posts;
 drop table if exists posts;
 drop table if exists users;
+drop table if exists reply_posts;
 drop view if exists all_posts;
 drop view if exists all_followed_posts;
 
@@ -40,6 +41,17 @@ CREATE TABLE followed_posts (
 	PRIMARY KEY (user_id, post_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id) on delete cascade,
 	FOREIGN KEY (post_id) REFERENCES posts(post_id) on delete cascade	
+) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Reply Posts
+CREATE TABLE reply_posts (
+	reply_id	INT(11) NOT NULL AUTO_INCREMENT, 	
+	reply_date 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	content 	TEXT NOT NULL,
+	user_id 	INT(11) NOT NULL,
+	post_id 	INT(11) NOT NULL,
+	PRIMARY KEY (reply_id),
+	foreign key (user_id) references users(user_id) on delete cascade
 ) 	ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- could be useful views for the landing page
