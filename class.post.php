@@ -206,8 +206,8 @@ class post {
 						}
 						$html .= '</form>';
 					}
-					// show the create date
-					$html .= '<td align="right"><em>original post date: ' . $row['post_date'] . '</em></tr>';
+					// show the create date and username
+					$html .= '<td align="right"><em>posted by ' . $row['user_name'] . ' on ' . $row['post_date'] . '</em></tr>';
 					$html .= '<tr><td colspan="2"><hr align="center" width="100%"></td></tr>';
 				}
 			}

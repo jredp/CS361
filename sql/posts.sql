@@ -57,13 +57,15 @@ CREATE TABLE reply_posts (
 -- could be useful views for the landing page
 create view all_posts
 as
-select u.user_id, u.user_name, p.post_id, p.post_date, p.content, p.post_img, u.user_zip
+select u.user_id, u.user_name, p.post_id, date_format(p.post_date, "%b %e, %Y") post_date,
+p.content, p.post_img, u.user_zip
 from users u
 left join posts p on p.user_id = u.user_id;
 
 create view all_followed_posts
 as
-select u.user_id, u.user_name, u2.user_name as user_name_author, p.post_id, p.post_date, p.content, p.post_img
+select u.user_id, u.user_name, u2.user_name as user_name_author, p.post_id,
+date_format(p.post_date, "%b %e, %Y") post_date, p.content, p.post_img
 from users u
 join followed_posts f on u.user_id = f.user_id
 join posts p on f.post_id = p.post_id
