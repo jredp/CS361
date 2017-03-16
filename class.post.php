@@ -155,6 +155,7 @@ class post {
 			$sql .= "from all_posts ";
 			$sql .= "where user_name = :value ";
 		} else if ($filter == 'following') {
+			$sql .= ", user_name_author ";
 			$sql .= "from all_followed_posts ";
 			$sql .= "where user_name = :value ";
 		} else if ($filter == 'local') {
@@ -206,7 +207,11 @@ class post {
 						$html .= '</form>';
 					}
 					// show the create date and username
-					$html .= '<td align="right"><em>posted by ' . $row['user_name'] . ' on ' . $row['post_date'] . '</em></tr>';
+					if ($filter != 'following') {
+						$html .= '<td align="right"><em>posted by ' . $row['user_name'] . ' on ' . $row['post_date'] . '</em></tr>';
+					} else {
+						$html .= '<td align="right"><em>posted by ' . $row['user_name_author'] . ' on ' . $row['post_date'] . '</em></tr>';
+					}
 					$html .= '<tr><td colspan="2"><hr align="center" width="100%"></td></tr>';
 				}
 			}
