@@ -19,8 +19,8 @@ landing page
   x - posts form - edit
   x - posts for delete
 
-follow posts functionality
+x - follow posts functionality
 
 vote for posts functionality
 
-write tests - wip
+x - write tests - wip
