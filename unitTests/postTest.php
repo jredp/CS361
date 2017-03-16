@@ -14,13 +14,12 @@ function test($testname, $expected, $actual) {
 
 function runTests($hostname, $username, $password, $database, $mypost) {
 	$new_img = 'cwiTest.jpg';
-	$lastid =
-		createNoImageTest($hostname, $username, $password, $database, $mypost);
+	$lastid = createNoImageTest($hostname, $username, $password, $database, $mypost);
+	updateWithContentTest($hostname, $username, $password, $database, $mypost, $lastid);
+	updateNoContentTest($hostname, $username, $password, $database, $mypost, $lastid);
 	deleteNoImageTest($hostname, $username, $password, $database, $mypost, $lastid);
-	$lastid =
-		createWithImageTest($hostname, $username, $password, $database, $mypost, $new_img); 
-	if ($lastid)
-		deleteWithImageTest($hostname, $username, $password, $database, $mypost, $lastid, $new_img);
+	$lastid = createWithImageTest($hostname, $username, $password, $database, $mypost, $new_img); 
+	if ($lastid) deleteWithImageTest($hostname, $username, $password, $database, $mypost, $lastid, $new_img);
 	createNoContentTest($hostname, $username, $password, $database, $mypost);
 }
 
@@ -62,6 +61,10 @@ function deleteNoImageTest(
 	test('delete post no image test', 0, $post_count);
 }
 
+// file permissions are different when image is copied by script rather than
+// uploaded via form. the owner is still www but the group is different
+// some parts are commented out so we can run locally
+// will test on public web server
 function createWithImageTest(
 	$hostname, $username, $password, $database, $mypost, $new_img) {
 
@@ -101,6 +104,8 @@ function createWithImageTest(
 	/* } */
 }
 
+// file permissions created during createWithImageTest are such that
+// we can't delete. parts commented out until we can verify on web server
 function deleteWithImageTest(
 	$hostname, $username, $password, $database, $mypost, $lastid, $new_img) {
 	$mypost->delete($lastid, $new_img);
@@ -126,6 +131,33 @@ function createNoContentTest($hostname, $username, $password, $database, $mypost
 		test('create post with no content test', 1, 1);
 	} else {
 		test('create post with no content test', 1, 0);
+	}
+}
+
+function updateWithContentTest($hostname, $username, $password, $database, $mypost, $lastid) {
+	$content = 'updateWithContentTest';
+	$mypost->update($lastid, $content, null);
+	$sql = "select post_id from posts where content like '%" . $content . "%'";
+	$mysqli = new mysqli($hostname, $username, $password, $database);
+	$stmt = $mysqli->prepare($sql);
+	$stmt->execute();
+	$stmt->bind_result($postid);
+	$stmt->fetch();
+	$stmt->close();
+	$mysqli->close();
+	if ($postid == $lastid) {
+		test('update post with content test', 1, 1);
+	} else {
+		test('update post with content test', 1, 0);
+	}
+}
+
+function updateNoContentTest($hostname, $username, $password, $database, $mypost, $lastid) {
+	$content = null;
+	if (!$mypost->update($lastid, $content, null)) {
+		test('update post with no content test', 1, 1);
+	} else {
+		test('update post with no content test', 1, 0);
 	}
 }
 

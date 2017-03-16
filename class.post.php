@@ -75,7 +75,7 @@ class post {
 			}
 			return true;
 		} catch (PDOException $e) {
-			echo $e->getMessage();
+			/* echo $e->getMessage(); */
 			return false;
 		}
 	}
@@ -92,7 +92,7 @@ class post {
 			if (file_exists($image)) unlink($image);
 			return true;
 		} catch (PDOException $e) {
-			echo $e->getMessage();
+			/* echo $e->getMessage(); */
 			return false;
 		} 
 	}
@@ -108,9 +108,9 @@ class post {
 			$rs->execute();
 			return true;
 		} catch (PDOException $e) {
-			echo $e->getMessage();
-			echo "User ID: " . $user_id;
-			echo "Post ID: " . $post_id;
+			/* echo $e->getMessage(); */
+			/* echo "User ID: " . $user_id; */
+			/* echo "Post ID: " . $post_id; */
 			return false;
 		}		
 	}
@@ -126,7 +126,7 @@ class post {
 			$rs->execute();
 			return true;
 		} catch (PDOException $e) {
-			echo $e->getMessage();
+			/* echo $e->getMessage(); */
 			return false;
 		}		
 	}
@@ -212,7 +212,7 @@ class post {
 				}
 			}
 		} else {
-			$html= '<tr><td colspan="4" class="text-center">no records found</td></tr>';
+			$html = '<tr><td colspan="4" class="text-center">no records found</td></tr>';
 		}
 		$html .= '</tbody></table>';
 		return $html;

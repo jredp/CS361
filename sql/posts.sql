@@ -2,9 +2,9 @@
 
 drop table if exists created_posts;
 drop table if exists followed_posts;
+drop table if exists reply_posts;
 drop table if exists posts;
 drop table if exists users;
-drop table if exists reply_posts;
 drop view if exists all_posts;
 drop view if exists all_followed_posts;
 
@@ -70,7 +70,6 @@ join posts p on f.post_id = p.post_id
 join users u2 on u2.user_id = p.user_id;
 
 
--- i think there may be an issue with using an int for zip code. this one is for boston
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
 values ('test1', 'test', 'one', 'password', 'test1@test.com', 01841);
 
