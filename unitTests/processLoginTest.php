@@ -62,7 +62,6 @@
             $mysqli->close();
 			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.');
 		}
-		testUserWrongPass();		
-	unitTest();
-	//$mysqli->close();
+		testUserWrongPass();			
+	$mysqli->close();
 ?>
