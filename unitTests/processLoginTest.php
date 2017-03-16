@@ -7,7 +7,7 @@
 	    assert_options(ASSERT_QUIET_EVAL, 1);
 		// Create a handler function
 		function my_assert_handler($file, $line, $code, $desc = null) {
-		    echo "Assertion failed at line $line";
+		    echo "PASS: Assertion failed at line $line. As expected, error is";
 		    if ($desc) {
 		        echo ": $desc";
 		  	}
@@ -16,13 +16,14 @@
 		// Set up the callback
 		assert_options(ASSERT_CALLBACK, 'my_assert_handler');	
     }
+    unitTest();
     
 	//---------- Login TESTS ------------	
 		//Test 1: Username is blank
 		function testUserName(){
 	   	  	$uname ; //empty
 	   	 	$pass = "not empty";
-			assert(isset($uname), 'The username field must not be empty.');
+			assert(isset($uname), 'The username field must not be empty.<br>');
 		}
 		testUserName();
 		
@@ -30,7 +31,7 @@
 		function testPassword(){
 	    	$uname = "not empty"; //empty
 	    	$pass ;
-			assert(isset($pass), 'The password field must not be empty.');
+			assert(isset($pass), 'The password field must not be empty.<br>');
 		}
 		testPassword();
 		
@@ -45,7 +46,7 @@
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
             $mysqli->close();
-			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.');
+			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.<br>');
 		}
 		testUserNotIn();
 		
@@ -60,8 +61,7 @@
                     AND user_pass = '$pass'";
             $result = $mysqli->query($sql);
             $mysqli->close();
-			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.');
+			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.<br>');
 		}
-		testUserWrongPass();			
-	$mysqli->close();
+		testUserWrongPass();				
 ?>
