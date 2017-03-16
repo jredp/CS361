@@ -9,7 +9,7 @@ if ($filter == 'mine')
 else if ($filter == 'following')
 	$results = $mypost->view($curr_user, $filter, $curr_user);
 else if ($filter == 'local')
-	$results = $mypost->view($curr_user, $filter, $curr_user); // TODO
+	$results = $mypost->view($curr_user, $filter, $_SESSION['user_zip']);
 else // we want all posts
 	$results = $mypost->view($curr_user, $filter);
 
