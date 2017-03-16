@@ -162,11 +162,9 @@ class post {
 			$sql .= "where user_zip = :value ";
 		}
 		$sql .= "order by post_date desc";
-		echo $sql . ', ' . $value;
 		$rs = $this->conn->prepare($sql);
 		if ($filter != 'all')
 			$rs->bindparam(":value", $value);
-		/* echo $sql; */
 		$rs->execute();
 
 		if ($rs->rowCount() > 0) {
