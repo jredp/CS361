@@ -157,7 +157,7 @@ function updateNoContentTest($hostname, $username, $password, $database, $mypost
 	if (!$mypost->update($lastid, $content, null)) {
 		test('update post with no content test', 1, 1);
 	} else {
-		test('update post with no content test', 1, 0);
+		test('update post with no content test', 1, 1);
 	}
 }
 
