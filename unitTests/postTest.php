@@ -9,7 +9,7 @@ function test($testname, $expected, $actual) {
 		$prefix = 'PASS: ';
 	else
 		$prefix = 'FAIL: ';
-	echo $prefix . $testname . " expected: " . $expected . ", got: ". $actual . "\n";
+	echo $prefix . $testname . " expected: " . $expected . ", got: ". $actual . "<br>";
 }
 
 function runTests($hostname, $username, $password, $database, $mypost) {
