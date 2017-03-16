@@ -73,13 +73,13 @@ join users u2 on u2.user_id = p.user_id;
 
 
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
-values ('test1', 'test', 'one', 'password', 'test1@test.com', 01841);
+values ('test1', 'test', 'one', 'password', 'test1@test.com', '01841');
 
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
-values ('test2', 'test', 'two', 'password', 'test2@test.com', 90210);
+values ('test2', 'test', 'two', 'password', 'test2@test.com', '90210');
 
 insert into users (user_name, first_name, last_name, user_pass, user_email, user_zip)
-values ('test3', 'test', 'three', 'password', 'test3@test.com', 55105);
+values ('test3', 'test', 'three', 'password', 'test3@test.com', '55105');
 
 insert into posts (content, user_id, post_img)
 values ('my first post', (select user_id from users where user_name = 'test1'), 'post1_img.jpg');
