@@ -52,9 +52,9 @@ if (isset($_POST['unfollow'])) {
 <form method="post">
 <td>filter posts</td>
 <td>
-<select name="cat" onchange="showPosts(this.value);">
+<select id="ddlPost" name="cat" onchange="showPosts(this.value);">
 <option value="">select post category</option>
-<option value="mine">my posts</option>
+<option value="mine" selected="selected">my posts</option>
 <option value="all">all posts</option>
 <option value="following">posts I'm following</option>
 <option value="local">local posts</option>
