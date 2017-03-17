@@ -4,11 +4,12 @@ for us.
 x - create tables: posts, followed_posts
 
 posts class
-x - insert, update, delete, view
+x - insert, update, delete, view, search
 
 landing page
   x - get session vars
   x - dropdown list filter
+  x - search posts
   x - add link in posts table for edit, delete
   x - change orientation of posts per Bryce's feedback 11 Mar
   x - posts form - create
@@ -23,4 +24,4 @@ x - follow posts functionality
 
 vote for posts functionality
 
-x - write tests - wip
+x - write post unit tests
