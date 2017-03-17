@@ -17,6 +17,7 @@ landing page
     x - content
     x - image upload
     x - save to database 
+    x - resize image
   x - posts form - edit
   x - posts for delete
 
