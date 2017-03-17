@@ -49,7 +49,6 @@ if (isset($_POST['unfollow'])) {
 ?>
 <table>
 <tr>
-<form method="post">
 <td>filter posts</td>
 <td>
 <select id="ddlPost" name="cat" onchange="showPosts(this.value);">
@@ -61,16 +60,15 @@ if (isset($_POST['unfollow'])) {
 </select>
 </td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td>search</td>
+<td>search by content</td>
 <td><input type="text" name="search" id="txtSearch"></td>
 <td><button id="btn-search" name="btn-search" onclick="searchPosts()">search</button></td>
-</form>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td><a href="create-post.php">create new post</a>&nbsp;&nbsp;&nbsp;<a href="logout.php">logout</a></td>
 </tr>
 </table>
 <br>
-<div id="post-list">
-</div>
+<div id="post-title"></div>
+<div id="post-list"></div>
 </body>
 </html> 
