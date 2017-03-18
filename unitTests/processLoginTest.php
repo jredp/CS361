@@ -1,4 +1,7 @@
 <?php
+$inc = dirname(dirname(__FILE__)) . '/dbcn.php';
+require_once $inc;
+
 	function unitTest () {
 	//PHP ASSERTION WORK -------------------
 		// Active assert and make it quiet
@@ -36,32 +39,32 @@
 		testPassword();
 		
 		//Test 3: Username not in the system
-		function testUserNotIn(){
-		    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+		function testUserNotIn(){		    
+			$mysqli = new mysqli($hostname, $username, $password, $database);
 	    	$uname = "test111"; //Not in DB
 	    	$pass = "abc123";
 	    	$sql = "SELECT user_name, user_zip, user_level 
                     FROM users 
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
-            $result = $mysqli->query($sql);
+            $result = $mysqli->query($sql);            
             $mysqli->close();
 			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.<br>');
 		}
 		testUserNotIn();
 		
 		//Test 4: Wrong Password
-		function testUserWrongPass(){
-		    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+		function testUserWrongPass(){		    
+			$mysqli = new mysqli($hostname, $username, $password, $database);
 	    	$uname = "test1";
 	    	$pass = "abc123"; //Wrong Pass
 	    	$sql = "SELECT user_name, user_zip, user_level 
                     FROM users 
                     WHERE user_name = '$uname' 
                     AND user_pass = '$pass'";
-            $result = $mysqli->query($sql);
+            $result = $mysqli->query($sql);            
             $mysqli->close();
 			assert(($result->num_rows > 0), 'You have supplied a wrong user/password combination. Please try again.<br>');
-		}
+		}		
 		testUserWrongPass();				
 ?>
