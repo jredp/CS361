@@ -1,8 +1,10 @@
 <?php
+    session_start();
+    include_once 'dbcn.php';
     //Turn on error reporting
     ini_set('display_errors', 'On');
     //Connects to the database
-    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+    $mysqli = new mysqli($hostname, $username, $password, $database);
     if($mysqli->connect_errno) {
         echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
     }
@@ -34,12 +36,15 @@
         //([uname], [fname], [lname], [pass], [email], [zip])
         $statement->bind_param("sssssi",$uname,$fname,$lname,$pass,$email,$zip);
         $result = $statement->execute();
-
-        if ($result) {
-					  // TODO: need to add the session variables and then redirect, see processLogin for example
+        
+        if ($result) {            
+            $_SESSION['signed_in'] = true;                     
+            $_SESSION['user_name']  = $uname;
+            $_SESSION['user_zip']  = $zip;
+            $_SESSION['user_level'] = 1;
             echo "<h3><br><p>Record added successfully</h3>";
-            echo 'Welcome, ' . $uname . '. <a href="index.php">would auto-forward to landing here</a>.';
-        } 
+            echo 'Welcome, ' . $uname . '. <a href="landing.php">would auto-forward to landing here</a>.';
+        }         
         else {
             echo "<br>Error adding record: " . $mysqli->error;
         }

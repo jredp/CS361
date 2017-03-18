@@ -7,7 +7,7 @@
 	if ($location == 'dev')
 		$mysqli = new mysqli("127.0.0.1","cs361","p@ssw0rD","scratch");
 	else
-    $mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+    $mysqli = new mysqli($hostname, $username, $password, $database);
 
     if($mysqli->connect_errno) {
         echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
