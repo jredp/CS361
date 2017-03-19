@@ -1,4 +1,7 @@
 <?php
+$inc = dirname(dirname(__FILE__)) . '/dbcn.php';
+requre_once $inc;
+
 	function unitTest () {
 	//PHP ASSERTION WORK -------------------
 		// Active assert and make it quiet
@@ -7,7 +10,7 @@
 	    assert_options(ASSERT_QUIET_EVAL, 1);
 		// Create a handler function
 		function my_assert_handler($file, $line, $code, $desc = null) {
-		    echo "Assertion failed at line $line";
+		    echo "PASS: Assertion failed at line $line. As expected, error is";
 		    if ($desc) {
 		        echo ": $desc";
 		  	}
@@ -16,7 +19,8 @@
 		// Set up the callback
 		assert_options(ASSERT_CALLBACK, 'my_assert_handler');	
     }
-    
+    unitTest();
+
 	//---------- Registration TESTS ------------	
 		//Test 1: Username is blank
 		function testUserName(){
