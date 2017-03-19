@@ -132,7 +132,8 @@ requre_once $inc;
 
 		//Test 9: username already exists
 		function testUsernameExists(){
-	    	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+	    	//$mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+	    	$mysqli = new mysqli($hostname, $username, $password, $database);
 	    	$uname = "test1"; //should already exist in DB
 	    	$fname = "not empty";
 	   	  	$lname = "not empty";
@@ -143,13 +144,15 @@ requre_once $inc;
                     FROM users 
                     WHERE user_name = '$uname'";
             $result = $mysqli->query($sql);
+			$mysqli->close();
 			assert(($result->num_rows == 0), '<br>The username you have entered already exists. Please try another one.');
 		}
 		testUsernameExists();
 
 		//Test 10: email already exists
 		function testEmailExists(){
-	    	$mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+	    	//$mysqli = new mysqli("oniddb.cws.oregonstate.edu","parkinja-db","FnfHVCECnMOBAPPX","parkinja-db");
+	    	$mysqli = new mysqli($hostname, $username, $password, $database);
 	    	$uname = "not empty";
 	    	$fname = "not empty";
 	   	  	$lname = "not empty";
@@ -160,6 +163,7 @@ requre_once $inc;
                     FROM users 
                     WHERE email = '$email'";
             $result = $mysqli->query($sql);
+            $mysqli->close();
 			assert(($result->num_rows == 0), '<br>The email you have entered already exists.');
 		}
 		testEmailExists();
