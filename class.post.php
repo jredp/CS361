@@ -185,7 +185,7 @@ class post {
 					$html .= '<tr><td colspan="2">' . $row['content'] . '</td></tr>';
 					// if the user owns the post show edit / delete links
 					$html .= '<tr>';
-					if (($curr_user == $row['user_name'] && $filter != 'following') || ($curr_user == $row['user_name_author'] && $filter == 'following')) {
+					if (($curr_user == $row['user_name'] && $filter != 'following') || ($filter == 'following' && $curr_user == $row['user_name_author'])) {
 						$html .= '<td><a href="edit-post.php?pid=' . $row['post_id'] . '">edit post</a>&nbsp;&nbsp;';
 						$html .= '<a href="delete-post.php?pid=' . $row['post_id'] . '">delete post</a>';
 					// if user already follows post, show unfollow button; else show follow button
