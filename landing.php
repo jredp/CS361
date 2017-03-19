@@ -53,10 +53,10 @@ if (isset($_POST['unfollow'])) {
 <td>
 <select id="ddlPost" name="cat" onchange="showPosts(this.value);">
 <option value="">select post category</option>
-<option value="mine" selected="selected">my posts</option>
+<option value="mine">my posts</option>
 <option value="all">all posts</option>
 <option value="following">posts I'm following</option>
-<option value="local">local posts</option>
+<option value="local" selected="selected">local posts</option>
 </select>
 </td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
