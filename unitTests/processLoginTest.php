@@ -10,7 +10,7 @@ require_once $inc;
 	    assert_options(ASSERT_QUIET_EVAL, 1);
 		// Create a handler function
 		function my_assert_handler($file, $line, $code, $desc = null) {
-		    echo "PASS: Assertion failed at line $line. As expected, error is";
+		    echo "PASS: Assertion stopped at line $line. As expected, error is";
 		    if ($desc) {
 		        echo ": $desc";
 		  	}

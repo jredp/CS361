@@ -1,6 +1,6 @@
 <?php
 $inc = dirname(dirname(__FILE__)) . '/dbcn.php';
-requre_once $inc;
+require_once $inc;
 
 	function unitTest () {
 	//PHP ASSERTION WORK -------------------
@@ -10,7 +10,7 @@ requre_once $inc;
 	    assert_options(ASSERT_QUIET_EVAL, 1);
 		// Create a handler function
 		function my_assert_handler($file, $line, $code, $desc = null) {
-		    echo "PASS: Assertion failed at line $line. As expected, error is";
+		    echo "PASS: Assertion stopped at line $line. As expected, error is";
 		    if ($desc) {
 		        echo ": $desc";
 		  	}
@@ -30,7 +30,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 00000;
-			assert(isset($uname), 'The username field must not be empty.');
+			assert(isset($uname), 'The username field must not be empty.<br>');
 		}
 		testUserName();
 
@@ -42,7 +42,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 00000;
-			assert(isset($fname), 'The first name field must not be empty.');
+			assert(isset($fname), 'The first name field must not be empty.<br>');
 		}
 		testFirstName();
 
@@ -54,7 +54,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 00000;
-			assert(isset($lname), 'The last name field must not be empty.');
+			assert(isset($lname), 'The last name field must not be empty.<br>');
 		}
 		testLastName();
 		
@@ -66,7 +66,7 @@ requre_once $inc;
 	   	 	$pass ; //empty
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 00000;
-			assert(isset($pass), 'The password field must not be empty.');
+			assert(isset($pass), 'The password field must not be empty.<br>');
 		}
 		testPassword();
 		
@@ -78,7 +78,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email ; //empty
 	   	 	$zip = 00000;
-			assert(isset($email), 'The email field must not be empty.');
+			assert(isset($email), 'The email field must not be empty.<br>');
 		}
 		testEmail();
 
@@ -90,7 +90,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip ; //empty
-			assert(isset($zip), 'The zip code field must not be empty.');
+			assert(isset($zip), 'The zip code field must not be empty.<br>');
 		}
 		testZip();
 
@@ -102,7 +102,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 00000;
-			assert(is_numeric($uname), 'The username must consist only of alphanumeric characters.');
+			assert(is_numeric($uname), 'The username must consist only of alphanumeric characters.<br>');
 		}
 		testUsernameAlNum();
 
@@ -114,7 +114,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = "not numbers"; //not a valid zip code
-			assert(ctype_digit($zip), 'The zip code must consist only of numbers.');
+			assert(ctype_digit($zip), 'The zip code must consist only of numbers.<br>');
 		}
 		testZipNum();
 
@@ -126,7 +126,7 @@ requre_once $inc;
 	   	 	$pass = "not empty";
 	   	 	$email = "not@empty.com";
 	   	 	$zip = 123456; //not a valid zip code
-			assert(strlen((string)$zip) == 5, 'The zip code provided is invalid.');
+			assert(strlen((string)$zip) == 5, 'The zip code provided is invalid.<br>');
 		}
 		testZipLength();
 
@@ -145,7 +145,7 @@ requre_once $inc;
                     WHERE user_name = '$uname'";
             $result = $mysqli->query($sql);
 			$mysqli->close();
-			assert(($result->num_rows == 0), '<br>The username you have entered already exists. Please try another one.');
+			assert(($result->num_rows == 0), '<br>The username you have entered already exists. Please try another one.<br>');
 		}
 		testUsernameExists();
 
@@ -164,7 +164,7 @@ requre_once $inc;
                     WHERE email = '$email'";
             $result = $mysqli->query($sql);
             $mysqli->close();
-			assert(($result->num_rows == 0), '<br>The email you have entered already exists.');
+			assert(($result->num_rows == 0), '<br>The email you have entered already exists.<br>');
 		}
 		testEmailExists();
 
@@ -178,7 +178,5 @@ requre_once $inc;
 	   	 	$zip = 00000; //not a valid zip code
 			assert(filter_var($email, FILTER_VALIDATE_EMAIL), 'The email provided is invalid.');
 		}
-		testValidEmail();*/
-
-	unitTest();
+		testValidEmail();*/	
 ?>
